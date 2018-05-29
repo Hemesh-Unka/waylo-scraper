@@ -6,13 +6,25 @@ describe Parse do
     @doc = Nokogiri::HTML(open(local_html_path))
   end
 
-  describe '.title' do
-    it 'returns the title of the first product' do
-      expect(Parse.title(@doc)).to include('8 Wired Craft Beer Stout single bottle 500ml')
+  describe '.all' do
+    it 'returns all the products on the page' do
+      expect(Parse.all(@doc).count).to eq(24)
+    end
+
+    it 'returns the first title' do
+      expect(Parse.title(Parse.all(@doc).first)).to eq('8 Wired Craft Beer Stout single bottle 500ml')
     end
 
     it 'returns the title of the last product' do
-      expect(Parse.title(@doc)).to include('Boundary Road Brewery Lager 330ml Bottles 6pk')
+      expect(Parse.title(Parse.all(@doc).last)).to eq('Boundary Road Brewery Lager 330ml Bottles 6pk')
+    end
+
+    it 'returns the price of the first product' do
+      expect(Parse.price(Parse.all(@doc).first)).to eq(11.99)
+    end
+
+    it 'returns the price of the last product' do
+      expect(Parse.price(Parse.all(@doc).last)).to eq(12.00)
     end
   end
 end
