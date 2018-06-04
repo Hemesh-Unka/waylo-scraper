@@ -10,12 +10,21 @@ describe Parse do
     it 'returns title and prices of items on page' do
       expect(Parse.all(@doc).first).to eq(
         title: '8 Wired Craft Beer Stout single bottle 500ml',
-        price: 11.99
+        price: 11.99,
+        on_special: false
+      )
+
+      # check for product that is on special
+      expect(Parse.all(@doc)[2]).to eq(
+        title: 'Altitude Brewing Craft Beer Goldpanners Profit single bottle 500ml',
+        price: 9.49,
+        on_special: true
       )
 
       expect(Parse.all(@doc).last).to eq(
         title: 'Boundary Road Brewery Lager 330ml Bottles 6pk',
-        price: 12.00
+        price: 12.00,
+        on_special: false
       )
     end
 
