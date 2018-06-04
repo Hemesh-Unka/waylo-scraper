@@ -1,13 +1,24 @@
 class Parse
-  def self.all(data)
-    data.css('.gridProductStamp')
-  end
+  class << self
+    def all(data)
+      items = []
+      data.css('.gridProductStamp').each do |item|
+        items.push(
+          title: title(item),
+          price: price(item)
+        )
+      end
+      items
+    end
 
-  def self.title(data)
-    data.css('.gridProductStamp-name').text.strip
-  end
+    private
 
-  def self.price(data)
-    data.css('.gridProductStamp-price').text.strip.gsub(/[^0-9,.]/, '').to_f
+    def title(data)
+      data.css('.gridProductStamp-name').text.strip
+    end
+
+    def price(data)
+      data.css('.gridProductStamp-price').text.strip.gsub(/[^0-9,.]/, '').to_f
+    end
   end
 end
