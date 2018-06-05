@@ -5,15 +5,13 @@ class Parse
 
   class << self
     def all(data)
-      loop_through_items(data)
+      get_items(data)
     end
 
     private
 
-    def loop_through_items(data)
-      items(data).map do |i|
-        item(i)
-      end
+    def get_items(data)
+      items(data).map { |i| item(i) }
     end
 
     def item(data)
