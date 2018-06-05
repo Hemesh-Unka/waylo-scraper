@@ -5,18 +5,24 @@ class Parse
 
   class << self
     def all(data)
-      items = []
-      data.css('.gridProductStamp').each do |item|
-        items.push(
-          title: title(item),
-          price: price(item),
-          on_special: on_special?(item)
-        )
-      end
-      items
+      loop_through_items(data)
     end
 
     private
+
+    def loop_through_items(data)
+      items(data).map do |i|
+        item(i)
+      end
+    end
+
+    def item(data)
+      { title: title(data), price: price(data), on_special: on_special?(data) }
+    end
+
+    def items(data)
+      data.css('.gridProductStamp')
+    end
 
     def title(data)
       data.css(TITLE_CSS_TAG).text.strip
