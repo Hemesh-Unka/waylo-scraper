@@ -38,14 +38,14 @@ describe Parse do
       local_html_path = File.join(File.dirname(__FILE__), '/html_test_files', 'cd_lp.html')
       doc = Nokogiri::HTML(open(local_html_path))
 
-      expect(Parse.is_last_page?(doc)).to eq(true)
+      expect(Parse.last_page?(doc)).to eq(true)
     end
 
     it 'returns false if it is not the last page' do
       local_html_path = File.join(File.dirname(__FILE__), '/html_test_files', 'cd_p1.html')
       doc = Nokogiri::HTML(open(local_html_path))
 
-      expect(Parse.is_last_page?(doc)).to eq(false)
+      expect(Parse.last_page?(doc)).to eq(false)
     end
   end
 end
