@@ -8,6 +8,10 @@ class Parse
       get_items(data)
     end
 
+    def is_last_page?(data)
+      last_page?(data)
+    end
+
     private
 
     def get_items(data)
@@ -33,6 +37,10 @@ class Parse
     def on_special?(data)
       return false if data.css(ON_SPECIAL_CSS_TAG)[0].nil?
       data.css(ON_SPECIAL_CSS_TAG)[0].attr('src').include?('/Content/PromotionTags/badge-special.png')
+    end
+
+    def last_page?(data)
+      items(data).count < 24
     end
   end
 end
