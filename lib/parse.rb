@@ -1,7 +1,8 @@
 class Parse
-  PRICE_CSS_TAG = '.gridProductStamp-price'
-  TITLE_CSS_TAG = '.gridProductStamp-name'
-  ON_SPECIAL_CSS_TAG = '.gridProductStamp-productTag img.hidden-phone'
+  PRICE_CSS_TAG = '.gridProductStamp-price'.freeze
+  TITLE_CSS_TAG = '.gridProductStamp-name'.freeze
+  ON_SPECIAL_CSS_TAG = '.gridProductStamp-productTag img.hidden-phone'.freeze
+  ON_SPECIAL_IMG_PATH = '/Content/PromotionTags/badge-special.png'.freeze
 
   class << self
     def all(data)
@@ -36,7 +37,7 @@ class Parse
 
     def on_special?(data)
       return false if data.css(ON_SPECIAL_CSS_TAG)[0].nil?
-      data.css(ON_SPECIAL_CSS_TAG)[0].attr('src').include?('/Content/PromotionTags/badge-special.png')
+      data.css(ON_SPECIAL_CSS_TAG)[0].attr('src').include?(ON_SPECIAL_IMG_PATH)
     end
   end
 end
